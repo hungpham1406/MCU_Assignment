@@ -101,7 +101,18 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  HAL_GPIO_WritePin(D2_GPIO_Port, D2_Pin, SET);
+	  HAL_GPIO_WritePin(D3_GPIO_Port, D3_Pin, SET);
+	  HAL_Delay(3000);
+	  HAL_GPIO_WritePin(D2_GPIO_Port, D2_Pin, RESET);
+	  HAL_GPIO_WritePin(D3_GPIO_Port, D3_Pin, SET);
+	  HAL_Delay(3000);
+	  HAL_GPIO_WritePin(D2_GPIO_Port, D2_Pin, SET);
+	  HAL_GPIO_WritePin(D3_GPIO_Port, D3_Pin, RESET);
+	  HAL_Delay(3000);
+	  HAL_GPIO_WritePin(D2_GPIO_Port, D2_Pin, SET);
+	  HAL_GPIO_WritePin(D3_GPIO_Port, D3_Pin, SET);
+	  HAL_Delay(3000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -238,7 +249,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LD2_Pin|D2_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, D3_Pin|D5_Pin|D4_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -246,12 +260,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LD2_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin;
+  /*Configure GPIO pins : LD2_Pin D2_Pin */
+  GPIO_InitStruct.Pin = LD2_Pin|D2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : D3_Pin D5_Pin D4_Pin */
+  GPIO_InitStruct.Pin = D3_Pin|D5_Pin|D4_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
