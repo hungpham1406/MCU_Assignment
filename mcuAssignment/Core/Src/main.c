@@ -100,7 +100,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
 	  HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, RESET);
 	  HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, SET);
 
@@ -116,6 +115,8 @@ int main(void)
 	  HAL_GPIO_WritePin(D2_GPIO_Port, D2_Pin, SET);
 	  HAL_GPIO_WritePin(D3_GPIO_Port, D3_Pin, SET);
 	  HAL_Delay(3000);
+    /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -263,12 +264,24 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : button1_Pin button2_Pin */
+  GPIO_InitStruct.Pin = button1_Pin|button2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pins : LD2_Pin D7_Pin D2_Pin */
   GPIO_InitStruct.Pin = LD2_Pin|D7_Pin|D2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : button3_Pin */
+  GPIO_InitStruct.Pin = button3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(button3_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : D6_Pin D3_Pin D5_Pin D4_Pin */
   GPIO_InitStruct.Pin = D6_Pin|D3_Pin|D5_Pin|D4_Pin;
@@ -286,13 +299,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
  int counter=100;
  void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim ){
-	 if(counter>0) {
-		 counter--;
-	 }
-	 if(counter <= 0){
-		 HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-		 counter=0;
-	 }
+
 }
 /* USER CODE END 4 */
 
