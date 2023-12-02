@@ -6,7 +6,7 @@
  */
 
 #include "fsm_automatic.h"
-
+//hello
 void switchMode2() {
 	status = RED_MAN;
 	counter1 = redTimer;
