@@ -7,6 +7,7 @@
 
 #include "fsm_automatic.h"
 
+int turnPedestrianLight = 0;
 void switchMode2() {
 	status = RED_MAN;
 	counter1 = redTimer;
@@ -19,11 +20,14 @@ void switchMode2() {
 void fsm_automatic_run() {
 	switch(status) {
 	case INIT:
-		turnOffLed();
+		//turnOffLed();
 
 		status = RED1_GREEN2_AUTO;
 		counter1 = redTimer;
 		counter2 = greenTimer;
+		if (isButtonPressed(3)) {
+			turnPedestrianLight = 1;
+		}
 
 //		updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		setTimer1(greenTimer*100);
@@ -32,6 +36,9 @@ void fsm_automatic_run() {
 		break;
 	case RED1_GREEN2_AUTO:
 		displayLed(RED1_GREEN2);
+		if (isButtonPressed(3)) {
+					turnPedestrianLight = 1;
+				}
 
 		if(timer2_flag == 1) {
 			setTimer2(100);
@@ -54,7 +61,6 @@ void fsm_automatic_run() {
 		break;
 	case RED1_YELLOW2_AUTO:
 		displayLed(RED1_YELLOW2);
-
 		if(timer2_flag == 1) {
 			setTimer2(100);
 			counter1--;
@@ -69,6 +75,9 @@ void fsm_automatic_run() {
 			counter2 = redTimer;
 //			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
+		if (isButtonPressed(3)) {
+					turnPedestrianLight = 1;
+				}
 
 		if(isButtonPressed(0)) {
 			switchMode2();
@@ -91,6 +100,10 @@ void fsm_automatic_run() {
 			counter2 = redTimer-greenTimer;
 //			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
+		if (isButtonPressed(3)) {
+			turnPedestrianLight = 1;
+		}
+
 
 		if(isButtonPressed(0)) {
 			switchMode2();
@@ -112,6 +125,9 @@ void fsm_automatic_run() {
 			counter1 = redTimer;
 			counter2 = greenTimer;
 //			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
+		}
+		if (isButtonPressed(3)) {
+			turnPedestrianLight = 1;
 		}
 
 		if(isButtonPressed(0)) {

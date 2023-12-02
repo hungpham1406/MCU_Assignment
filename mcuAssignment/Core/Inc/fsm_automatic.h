@@ -12,5 +12,6 @@
 
 void fsm_automatic_run();
 void switchMode2();
+extern int turnPedestrianLight;
 
 #endif /* INC_FSM_AUTOMATIC_H_ */
