@@ -22,6 +22,7 @@
 #include "software_timer.h"
 #include "button.h"
 #include "fsm_automatic.h"
+#include "fsm_manual.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -106,6 +107,7 @@ int main(void)
   while (1)
   {
 	  fsm_automatic_run();
+	  fsm_manual_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
