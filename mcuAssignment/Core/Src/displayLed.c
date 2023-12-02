@@ -16,12 +16,11 @@ int index_led = 0;
 int led_buffer[4] = {1, 2, 3, 4};
 
 void turnOffLed() {
-	HAL_GPIO_WritePin(LED_RED1_GPIO_Port, LED_RED1_Pin, SET);
-	HAL_GPIO_WritePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin, SET);
-	HAL_GPIO_WritePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin, SET);
-	HAL_GPIO_WritePin(LED_RED2_GPIO_Port, LED_RED2_Pin, SET);
-	HAL_GPIO_WritePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin, SET);
-	HAL_GPIO_WritePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin, SET);
+	HAL_GPIO_WritePin(D2_GPIO_Port, D2_Pin, RESET);
+	HAL_GPIO_WritePin(D3_GPIO_Port, D3_Pin, RESET);
+
+	HAL_GPIO_WritePin(D4_GPIO_Port, D4_Pin, RESET);
+	HAL_GPIO_WritePin(D5_GPIO_Port, D5_Pin, RESET);
 }
 
 void displayLed(int led_index) {
@@ -84,8 +83,8 @@ void displayLed(int led_index) {
 		HAL_GPIO_WritePin(D2_GPIO_Port, D2_Pin, SET);
 		HAL_GPIO_WritePin(D3_GPIO_Port, D3_Pin, SET);
 
-		HAL_GPIO_WritePin(D4_GPIO_Port, D4_Pin, RESET);
-		HAL_GPIO_WritePin(D5_GPIO_Port, D5_Pin, SET);
+		HAL_GPIO_WritePin(D4_GPIO_Port, D4_Pin, SET);
+		HAL_GPIO_WritePin(D5_GPIO_Port, D5_Pin, RESET);
 		break;
 	default:
 		break;
