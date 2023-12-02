@@ -16,5 +16,5 @@ int led_index = 0;
 int redTimer = 5;
 int yellowTimer = 2;
 int greenTimer = 3;
-
+char str[MAX_BUFFER_SIZE]={0};
 
