@@ -34,7 +34,7 @@ void fsm_automatic_run() {
 		displayLed(RED1_GREEN2);
 
 		if(timer2_flag == 1) {
-			int len= sprintf(str,"LED RED =%d    LED GREEN=%d\r\n",counter1,counter2);
+			int len= sprintf(str,"LED RED   = %d    LED GREEN  = %d\r\n",counter1,counter2);
 			 HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			setTimer2(100);
 			counter1--;
@@ -61,7 +61,7 @@ void fsm_automatic_run() {
 		displayLed(RED1_YELLOW2);
 
 		if(timer2_flag == 1) {
-			int len= sprintf(str,"LED RED =%d    LED YELLOW=%d\r\n",counter1,counter2);
+			int len= sprintf(str,"LED RED   = %d    LED YELLOW = %d\r\n",counter1,counter2);
 			 HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			setTimer2(100);
 			counter1--;
@@ -86,7 +86,7 @@ void fsm_automatic_run() {
 		displayLed(GREEN1_RED2);
 
 		if(timer2_flag == 1) {
-			int len= sprintf(str,"LED GREEN =%d    LED RED=%d\r\n",counter1,counter2);
+			int len= sprintf(str,"LED GREEN = %d    LED RED    = %d\r\n",counter1,counter2);
 			 HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			setTimer2(100);
 			counter1--;
@@ -111,7 +111,7 @@ void fsm_automatic_run() {
 		displayLed(YELLOW1_RED2);
 
 		if(timer2_flag == 1) {
-			int len= sprintf(str,"LED RED =%d    LED YELLOW=%d\r\n",counter1,counter2);
+			int len= sprintf(str,"LED RED   = %d    LED YELLOW = %d\r\n",counter1,counter2);
 			 HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			setTimer2(100);
 			counter1--;
