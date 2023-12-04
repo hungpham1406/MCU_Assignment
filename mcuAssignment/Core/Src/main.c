@@ -112,12 +112,16 @@ int main(void)
 	  fsm_automatic_run();
 	  fsm_manual_run();
 
-	  int x = 50;
+	  int x = 2000;
 //	  for(x=100; x<500; x=x+10)
 //	  {
-		__HAL_TIM_SET_AUTORELOAD(&htim3, x*3);
-		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 2*x);
-		HAL_Delay(100);
+		__HAL_TIM_SET_AUTORELOAD(&htim3, x);
+//		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, x*4);
+//
+//		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, x*3);
+//
+//		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, x*2);
+		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 500);
 //	  }
     /* USER CODE END WHILE */
 
