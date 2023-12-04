@@ -33,6 +33,10 @@
 #include "button.h"
 #include "software_timer.h"
 #include "displayLed.h"
+#include "string.h"
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 extern int status;
 extern int led_index;
@@ -41,5 +45,11 @@ extern int yellowTimer;
 extern int greenTimer;
 extern int turnPedestrian_flag;
 extern int statusPedestrian;
+
+// for uart
+# define MAX_BUFFER_SIZE 100
+extern char str[MAX_BUFFER_SIZE];
+extern UART_HandleTypeDef huart2;
+
 
 #endif /* INC_GLOBAL_H_ */

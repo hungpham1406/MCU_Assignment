@@ -20,4 +20,4 @@ int greenTimer = 3;
 int turnPedestrian_flag = 0;
 int statusPedestrian = 0;
 
-
+char str[MAX_BUFFER_SIZE]={0};

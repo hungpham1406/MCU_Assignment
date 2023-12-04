@@ -54,12 +54,16 @@ void fsm_manual_run() {
 
 		if(isButtonPressed(1)) {
 			timerMan++;
+			int len= sprintf(str,"LED RED    =  %d\r\n",timerMan);
+			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			if(timerMan > 99) timerMan = 1;
 //			updateLedBufferVal(timerMan/10, 2, timerMan%10, 2);
 		}
 
 		if(isButtonPressed(2)) {
 			status = INIT;
+			int len= sprintf(str,"%s\r\n","save successfully");
+			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			redTimer = timerMan;
 			greenTimer = redTimer - yellowTimer;
 		}
@@ -92,12 +96,16 @@ void fsm_manual_run() {
 
 		if(isButtonPressed(1)) {
 			timerMan++;
+			int len= sprintf(str,"LED YELLOW =  %d\r\n",timerMan);
+			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			if(timerMan >= redTimer) timerMan = 1;
 //			updateLedBufferVal(timerMan/10, 3, timerMan%10, 3);
 		}
 
 		if(isButtonPressed(2)) {
 			status = INIT;
+			int len= sprintf(str,"%s\r\n","save successfully");
+			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			yellowTimer = timerMan;
 			greenTimer = redTimer-yellowTimer;
 		}
@@ -129,12 +137,16 @@ void fsm_manual_run() {
 
 		if(isButtonPressed(1)) {
 			timerMan++;
+			int len= sprintf(str,"LED GREEN  =  %d\r\n",timerMan);
+			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			if(timerMan >= redTimer) timerMan = 1;
 //			updateLedBufferVal(timerMan/10, 4, timerMan%10, 4);
 		}
 
 		if(isButtonPressed(2)) {
 			status = INIT;
+			int len= sprintf(str,"%s\r\n","save successfully");
+			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			greenTimer = timerMan;
 			yellowTimer = redTimer - greenTimer;
 		}
