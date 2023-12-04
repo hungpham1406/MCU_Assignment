@@ -63,12 +63,9 @@ void fsm_manual_run() {
 		}
 
 		if(isButtonPressed(2)) {
-			int len= sprintf(str,"%s\r\n","save successfully");
-			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			status = INIT;
 			redTimer = timerMan;
 			greenTimer = redTimer - yellowTimer;
-
 		}
 
 		break;
@@ -106,8 +103,6 @@ void fsm_manual_run() {
 		}
 
 		if(isButtonPressed(2)) {
-			int len= sprintf(str,"%s\r\n","save successfully");
-			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			status = INIT;
 			yellowTimer = timerMan;
 			greenTimer = redTimer-yellowTimer;
@@ -147,13 +142,9 @@ void fsm_manual_run() {
 		}
 
 		if(isButtonPressed(2)) {
-
-			int len= sprintf(str,"%s\r\n","save successfully");
-			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			status = INIT;
 			greenTimer = timerMan;
 			yellowTimer = redTimer - greenTimer;
-
 		}
 		break;
 	default:

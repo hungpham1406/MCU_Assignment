@@ -1,0 +1,27 @@
+14:11:35 **** Incremental Build of configuration Debug for project mcuAssignment ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/fsm_automatic.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm_automatic.d" -MT"Core/Src/fsm_automatic.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/fsm_automatic.o"
+../Core/Src/fsm_automatic.c: In function 'fsm_automatic_run':
+../Core/Src/fsm_automatic.c:22:3: warning: implicit declaration of function 'turnOffLed' [-Wimplicit-function-declaration]
+   22 |   turnOffLed();
+      |   ^~~~~~~~~~
+arm-none-eabi-gcc -o "mcuAssignment.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\Huy\Desktop\New folder\MCU_Assignment\mcuAssignment\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mcuAssignment.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: mcuAssignment.elf
+ 
+arm-none-eabi-size   mcuAssignment.elf 
+arm-none-eabi-objdump -h -S  mcuAssignment.elf  > "mcuAssignment.list"
+arm-none-eabi-objcopy  -O ihex  mcuAssignment.elf  "mcuAssignment.hex"
+   text	   data	    bss	    dec	    hex	filename
+  17068	    156	   1996	  19220	   4b14	mcuAssignment.elf
+arm-none-eabi-objcopy  -O binary  mcuAssignment.elf  "mcuAssignment.bin"
+Finished building: default.size.stdout
+ 
+Finished building: mcuAssignment.hex
+Finished building: mcuAssignment.bin
+ 
+ 
+Finished building: mcuAssignment.list
+ 
+
+14:11:36 Build Finished. 0 errors, 1 warnings. (took 840ms)
+

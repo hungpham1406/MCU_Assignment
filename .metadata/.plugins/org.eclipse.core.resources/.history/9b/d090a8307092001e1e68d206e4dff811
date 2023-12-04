@@ -63,7 +63,9 @@ void fsm_manual_run() {
 		}
 
 		if(isButtonPressed(2)) {
-			int len= sprintf(str,"%s\r\n","save successfully");
+			char *tempStr="Save successfully";
+			str[MAX_BUFFER_SIZE] = *tempStr;
+			int len= sprintf(str,"LED YELLOW   = %d    LED RED = %d\r\n",counter1,counter2);
 			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			status = INIT;
 			redTimer = timerMan;
@@ -106,7 +108,9 @@ void fsm_manual_run() {
 		}
 
 		if(isButtonPressed(2)) {
-			int len= sprintf(str,"%s\r\n","save successfully");
+			char *tempStr="Save successfully";
+			str[MAX_BUFFER_SIZE] = *tempStr;
+			int len= sprintf(str,"LED YELLOW   = %d    LED RED = %d\r\n",counter1,counter2);
 			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			status = INIT;
 			yellowTimer = timerMan;
@@ -147,13 +151,13 @@ void fsm_manual_run() {
 		}
 
 		if(isButtonPressed(2)) {
-
-			int len= sprintf(str,"%s\r\n","save successfully");
-			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			status = INIT;
 			greenTimer = timerMan;
 			yellowTimer = redTimer - greenTimer;
-
+			 char *tempStr="Save successfully";
+			 str[MAX_BUFFER_SIZE] = *tempStr;
+			 int len= sprintf(str,"LED YELLOW   = %d    LED RED = %d\r\n",counter1,counter2);
+			 HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 		}
 		break;
 	default:

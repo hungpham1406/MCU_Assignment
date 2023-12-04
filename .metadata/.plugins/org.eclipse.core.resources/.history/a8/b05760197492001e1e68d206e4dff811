@@ -55,8 +55,6 @@ void fsm_automatic_run() {
 
 		if(isButtonPressed(0)) {
 			switchMode2();
-			int len= sprintf(str,"%s\r\n","Welcome to Manual Mode");
-			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 		}
 //		if(isButtonPressed(3)){
 //
@@ -87,8 +85,6 @@ void fsm_automatic_run() {
 
 		if(isButtonPressed(0)) {
 			switchMode2();
-			int len= sprintf(str,"%s\r\n","Welcome to Manual Mode");
-			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 		}
 		break;
 	case GREEN1_RED2_AUTO:
@@ -114,8 +110,6 @@ void fsm_automatic_run() {
 
 		if(isButtonPressed(0)) {
 			switchMode2();
-			int len= sprintf(str,"%s\r\n","Welcome to Manual Mode");
-			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 		}
 		break;
 	case YELLOW1_RED2_AUTO:
@@ -141,8 +135,6 @@ void fsm_automatic_run() {
 
 		if(isButtonPressed(0)) {
 			switchMode2();
-			int len= sprintf(str,"%s\r\n","Welcome to Manual Mode");
-			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 		}
 		break;
 	default:

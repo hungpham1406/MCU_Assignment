@@ -7,7 +7,7 @@
 
 #include "button.h"
 
-#define NUMBER_BUTTONS		3
+#define NUMBER_BUTTONS		4
 
 int KeyReg0[NUMBER_BUTTONS];
 int KeyReg1[NUMBER_BUTTONS];
@@ -17,8 +17,8 @@ int KeyReg3[NUMBER_BUTTONS];
 int timerForKeyPress[NUMBER_BUTTONS];
 int button_flag[NUMBER_BUTTONS];
 
-uint16_t gpio_pin[NUMBER_BUTTONS] = {button1_Pin, button2_Pin, button3_Pin};
-GPIO_TypeDef* gpio_port[NUMBER_BUTTONS] = {button1_GPIO_Port, button2_GPIO_Port, button3_GPIO_Port};
+uint16_t gpio_pin[NUMBER_BUTTONS] = {button1_Pin, button2_Pin, button3_Pin,buttonPedestrian_Pin};
+GPIO_TypeDef* gpio_port[NUMBER_BUTTONS] = {button1_GPIO_Port, button2_GPIO_Port, button3_GPIO_Port,buttonPedestrian_GPIO_Port};
 
 void initStateForButton() {
 	for (int i = 0; i < NUMBER_BUTTONS; ++i) {
