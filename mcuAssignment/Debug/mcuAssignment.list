@@ -37,13 +37,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00017590  00000000  00000000  00030968  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000e54d  00000000  00000000  00047ef8  2**0
+ 17 .debug_line   0000e550  00000000  00000000  00047ef8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00086c6c  00000000  00000000  00056445  2**0
+ 18 .debug_str    00086c6c  00000000  00000000  00056448  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000dd0b1  2**0
+ 19 .comment      00000053  00000000  00000000  000dd0b4  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000033c0  00000000  00000000  000dd104  2**2
+ 20 .debug_frame  000033c0  00000000  00000000  000dd108  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2023,65 +2023,65 @@ int main(void)
 	  fsm_manual_run();
  80010aa:	f7ff fead 	bl	8000e08 <fsm_manual_run>
 
-	  int x;
-	  for(x=2000; x>50; x=x-100)
- 80010ae:	f44f 63fa 	mov.w	r3, #2000	; 0x7d0
+	  int x = 3000;
+ 80010ae:	f640 33b8 	movw	r3, #3000	; 0xbb8
  80010b2:	607b      	str	r3, [r7, #4]
- 80010b4:	e029      	b.n	800110a <main+0x9a>
+	  for(x = 3000; x>50; x=x-200)
+ 80010b4:	f640 33b8 	movw	r3, #3000	; 0xbb8
+ 80010b8:	607b      	str	r3, [r7, #4]
+ 80010ba:	e029      	b.n	8001110 <main+0xa0>
 	  {
 		__HAL_TIM_SET_AUTORELOAD(&htim3, 5*x);
- 80010b6:	687a      	ldr	r2, [r7, #4]
- 80010b8:	4613      	mov	r3, r2
- 80010ba:	009b      	lsls	r3, r3, #2
- 80010bc:	441a      	add	r2, r3
- 80010be:	4b19      	ldr	r3, [pc, #100]	; (8001124 <main+0xb4>)
- 80010c0:	681b      	ldr	r3, [r3, #0]
- 80010c2:	62da      	str	r2, [r3, #44]	; 0x2c
- 80010c4:	687a      	ldr	r2, [r7, #4]
- 80010c6:	4613      	mov	r3, r2
- 80010c8:	009b      	lsls	r3, r3, #2
- 80010ca:	4413      	add	r3, r2
- 80010cc:	461a      	mov	r2, r3
- 80010ce:	4b15      	ldr	r3, [pc, #84]	; (8001124 <main+0xb4>)
- 80010d0:	60da      	str	r2, [r3, #12]
+ 80010bc:	687a      	ldr	r2, [r7, #4]
+ 80010be:	4613      	mov	r3, r2
+ 80010c0:	009b      	lsls	r3, r3, #2
+ 80010c2:	441a      	add	r2, r3
+ 80010c4:	4b17      	ldr	r3, [pc, #92]	; (8001124 <main+0xb4>)
+ 80010c6:	681b      	ldr	r3, [r3, #0]
+ 80010c8:	62da      	str	r2, [r3, #44]	; 0x2c
+ 80010ca:	687a      	ldr	r2, [r7, #4]
+ 80010cc:	4613      	mov	r3, r2
+ 80010ce:	009b      	lsls	r3, r3, #2
+ 80010d0:	4413      	add	r3, r2
+ 80010d2:	461a      	mov	r2, r3
+ 80010d4:	4b13      	ldr	r3, [pc, #76]	; (8001124 <main+0xb4>)
+ 80010d6:	60da      	str	r2, [r3, #12]
 //		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, x*4);
 //
 //		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, x*3);
 //
 //		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, x*2);
 		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*x));
- 80010d2:	687a      	ldr	r2, [r7, #4]
- 80010d4:	4613      	mov	r3, r2
- 80010d6:	009b      	lsls	r3, r3, #2
- 80010d8:	4413      	add	r3, r2
- 80010da:	4618      	mov	r0, r3
- 80010dc:	f7ff fab4 	bl	8000648 <__aeabi_i2d>
- 80010e0:	a30d      	add	r3, pc, #52	; (adr r3, 8001118 <main+0xa8>)
- 80010e2:	e9d3 2300 	ldrd	r2, r3, [r3]
- 80010e6:	f7ff f833 	bl	8000150 <__aeabi_dmul>
- 80010ea:	4602      	mov	r2, r0
- 80010ec:	460b      	mov	r3, r1
- 80010ee:	490d      	ldr	r1, [pc, #52]	; (8001124 <main+0xb4>)
- 80010f0:	680c      	ldr	r4, [r1, #0]
- 80010f2:	4610      	mov	r0, r2
- 80010f4:	4619      	mov	r1, r3
- 80010f6:	f7ff fb11 	bl	800071c <__aeabi_d2uiz>
- 80010fa:	4603      	mov	r3, r0
- 80010fc:	6363      	str	r3, [r4, #52]	; 0x34
-		HAL_Delay(200);
- 80010fe:	20c8      	movs	r0, #200	; 0xc8
- 8001100:	f000 fc60 	bl	80019c4 <HAL_Delay>
-	  for(x=2000; x>50; x=x-100)
- 8001104:	687b      	ldr	r3, [r7, #4]
- 8001106:	3b64      	subs	r3, #100	; 0x64
- 8001108:	607b      	str	r3, [r7, #4]
+ 80010d8:	687a      	ldr	r2, [r7, #4]
+ 80010da:	4613      	mov	r3, r2
+ 80010dc:	009b      	lsls	r3, r3, #2
+ 80010de:	4413      	add	r3, r2
+ 80010e0:	4618      	mov	r0, r3
+ 80010e2:	f7ff fab1 	bl	8000648 <__aeabi_i2d>
+ 80010e6:	a30c      	add	r3, pc, #48	; (adr r3, 8001118 <main+0xa8>)
+ 80010e8:	e9d3 2300 	ldrd	r2, r3, [r3]
+ 80010ec:	f7ff f830 	bl	8000150 <__aeabi_dmul>
+ 80010f0:	4602      	mov	r2, r0
+ 80010f2:	460b      	mov	r3, r1
+ 80010f4:	490b      	ldr	r1, [pc, #44]	; (8001124 <main+0xb4>)
+ 80010f6:	680c      	ldr	r4, [r1, #0]
+ 80010f8:	4610      	mov	r0, r2
+ 80010fa:	4619      	mov	r1, r3
+ 80010fc:	f7ff fb0e 	bl	800071c <__aeabi_d2uiz>
+ 8001100:	4603      	mov	r3, r0
+ 8001102:	6363      	str	r3, [r4, #52]	; 0x34
+		HAL_Delay(250);
+ 8001104:	20fa      	movs	r0, #250	; 0xfa
+ 8001106:	f000 fc5d 	bl	80019c4 <HAL_Delay>
+	  for(x = 3000; x>50; x=x-200)
  800110a:	687b      	ldr	r3, [r7, #4]
- 800110c:	2b32      	cmp	r3, #50	; 0x32
- 800110e:	dcd2      	bgt.n	80010b6 <main+0x46>
+ 800110c:	3bc8      	subs	r3, #200	; 0xc8
+ 800110e:	607b      	str	r3, [r7, #4]
+ 8001110:	687b      	ldr	r3, [r7, #4]
+ 8001112:	2b32      	cmp	r3, #50	; 0x32
+ 8001114:	dcd2      	bgt.n	80010bc <main+0x4c>
   {
- 8001110:	e7c9      	b.n	80010a6 <main+0x36>
- 8001112:	bf00      	nop
- 8001114:	f3af 8000 	nop.w
+ 8001116:	e7c6      	b.n	80010a6 <main+0x36>
  8001118:	33333333 	.word	0x33333333
  800111c:	3fe33333 	.word	0x3fe33333
  8001120:	2000012c 	.word	0x2000012c

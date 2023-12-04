@@ -112,8 +112,8 @@ int main(void)
 	  fsm_automatic_run();
 	  fsm_manual_run();
 
-	  int x;
-	  for(x=2000; x>50; x=x-100)
+	  int x = 3000;
+	  for(x = 3000; x>50; x=x-200)
 	  {
 		__HAL_TIM_SET_AUTORELOAD(&htim3, 5*x);
 //		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, x*4);
@@ -122,7 +122,7 @@ int main(void)
 //
 //		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, x*2);
 		__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*x));
-		HAL_Delay(200);
+		HAL_Delay(250);
 	  }
     /* USER CODE END WHILE */
 
