@@ -17,4 +17,7 @@ int redTimer = 5;
 int yellowTimer = 2;
 int greenTimer = 3;
 
+int turnPedestrian_flag = 0;
+int statusPedestrian = 0;
+
 

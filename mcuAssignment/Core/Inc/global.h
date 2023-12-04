@@ -26,10 +26,8 @@
 #define GREEN1_RED2				22
 #define YELLOW1_RED2			23
 
-#define PES_GREEN				30
-#define PES_RED					31
-#define GREEN_ON				32
-#define RED_ON					33
+#define PES_ON					30
+#define PES_OFF					31
 
 #include "main.h"
 #include "button.h"
@@ -41,5 +39,7 @@ extern int led_index;
 extern int redTimer;
 extern int yellowTimer;
 extern int greenTimer;
+extern int turnPedestrian_flag;
+extern int statusPedestrian;
 
 #endif /* INC_GLOBAL_H_ */

@@ -13,50 +13,29 @@ void switchMode2() {
 	counter1 = redTimer;
 	setTimer2(100);
 	setTimer4(25);
-
+	statusPedestrian = PES_OFF;
 //	updateLedBufferVal(counter1/10, 2, counter1%10, 2);
 }
-int turnPedestrianLight = 0;
-int statusPedestrian = 0;
 
-
-int ledPedestrian = 0;
-void displayLedPes (int ledPedestrian) {
-	switch(ledPedestrian){
-
-	case PES_GREEN:
-		HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, RESET);
-		HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, SET);
-		break;
-	case PES_RED:
-		HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, SET);
-		HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, RESET);
-		break;
-
-	default:
-		break;
-	}
-}
 void fsm_pedestrian(){
 	switch(statusPedestrian){
-	case GREEN_ON:
-		displayLedPes(PES_GREEN);
-		if(timer6_flag == 1){
-			statusPedestrian = RED_ON;
-			setTimer6(redTimer*100);
-		}
+	case PES_ON:
+		turnPedestrian_flag = 1;
 		break;
-	case RED_ON:
-		displayLedPes(PES_RED);
-		if(timer6_flag == 1){
-			statusPedestrian = GREEN_ON;
-			setTimer6((greenTimer + yellowTimer)*100);
-		}
+	case PES_OFF:
+		turnPedestrian_flag = 0;
+		HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, RESET);
+		HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, RESET);
 		break;
 	default:
 		break;
 	}
+
+	if(timer6_flag == 1) {
+		statusPedestrian = PES_OFF;
+	}
 }
+
 void fsm_automatic_run() {
 	switch(status) {
 	case INIT:
@@ -71,14 +50,10 @@ void fsm_automatic_run() {
 		setTimer1(greenTimer*100);
 		setTimer2(100);
 		setTimer5(25);
-		setTimer6(3);
 		break;
 	case RED1_GREEN2_AUTO:
 		displayLed(RED1_GREEN2);
-		if (isButtonPressed(3)) {
-			statusPedestrian = GREEN_ON;
-			setTimer6((greenTimer + yellowTimer)*100);
-		}
+
 		if(timer2_flag == 1) {
 			setTimer2(100);
 			counter1--;
@@ -125,6 +100,12 @@ void fsm_automatic_run() {
 		break;
 	case GREEN1_RED2_AUTO:
 		displayLed(GREEN1_RED2);
+		if (isButtonPressed(3)) {
+//			statusPedestrian = RED_ON;
+//			setTimer6(redTimer*100);
+			statusPedestrian = PES_ON;
+			setTimer6((3*redTimer)*100);
+		}
 
 		if(timer2_flag == 1) {
 			setTimer2(100);
