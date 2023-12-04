@@ -26,6 +26,11 @@
 #define GREEN1_RED2				22
 #define YELLOW1_RED2			23
 
+#define PES_GREEN				30
+#define PES_RED					31
+#define GREEN_ON				32
+#define RED_ON					33
+
 #include "main.h"
 #include "button.h"
 #include "software_timer.h"

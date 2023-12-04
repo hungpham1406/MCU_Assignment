@@ -108,6 +108,7 @@ int main(void)
   {
 	  fsm_automatic_run();
 	  fsm_manual_run();
+	  fsm_pedestrian();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

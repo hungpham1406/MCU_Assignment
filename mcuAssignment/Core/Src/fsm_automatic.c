@@ -7,7 +7,7 @@
 
 #include "fsm_automatic.h"
 
-int turnPedestrianLight = 0;
+
 void switchMode2() {
 	status = RED_MAN;
 	counter1 = redTimer;
@@ -16,7 +16,47 @@ void switchMode2() {
 
 //	updateLedBufferVal(counter1/10, 2, counter1%10, 2);
 }
+int turnPedestrianLight = 0;
+int statusPedestrian = 0;
 
+
+int ledPedestrian = 0;
+void displayLedPes (int ledPedestrian) {
+	switch(ledPedestrian){
+
+	case PES_GREEN:
+		HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, RESET);
+		HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, SET);
+		break;
+	case PES_RED:
+		HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, SET);
+		HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, RESET);
+		break;
+
+	default:
+		break;
+	}
+}
+void fsm_pedestrian(){
+	switch(statusPedestrian){
+	case GREEN_ON:
+		displayLedPes(PES_GREEN);
+		if(timer6_flag == 1){
+			statusPedestrian = RED_ON;
+			setTimer6(redTimer*100);
+		}
+		break;
+	case RED_ON:
+		displayLedPes(PES_RED);
+		if(timer6_flag == 1){
+			statusPedestrian = GREEN_ON;
+			setTimer6((greenTimer + yellowTimer)*100);
+		}
+		break;
+	default:
+		break;
+	}
+}
 void fsm_automatic_run() {
 	switch(status) {
 	case INIT:
@@ -25,21 +65,20 @@ void fsm_automatic_run() {
 		status = RED1_GREEN2_AUTO;
 		counter1 = redTimer;
 		counter2 = greenTimer;
-		if (isButtonPressed(3)) {
-			turnPedestrianLight = 1;
-		}
+
 
 //		updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		setTimer1(greenTimer*100);
 		setTimer2(100);
 		setTimer5(25);
+		setTimer6(3);
 		break;
 	case RED1_GREEN2_AUTO:
 		displayLed(RED1_GREEN2);
 		if (isButtonPressed(3)) {
-					turnPedestrianLight = 1;
-				}
-
+			statusPedestrian = GREEN_ON;
+			setTimer6((greenTimer + yellowTimer)*100);
+		}
 		if(timer2_flag == 1) {
 			setTimer2(100);
 			counter1--;
@@ -58,6 +97,7 @@ void fsm_automatic_run() {
 		if(isButtonPressed(0)) {
 			switchMode2();
 		}
+
 		break;
 	case RED1_YELLOW2_AUTO:
 		displayLed(RED1_YELLOW2);
@@ -75,9 +115,9 @@ void fsm_automatic_run() {
 			counter2 = redTimer;
 //			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
-		if (isButtonPressed(3)) {
-					turnPedestrianLight = 1;
-				}
+//		if (isButtonPressed(3)) {
+//					turnPedestrianLight = 1;
+//				}
 
 		if(isButtonPressed(0)) {
 			switchMode2();
@@ -100,9 +140,9 @@ void fsm_automatic_run() {
 			counter2 = redTimer-greenTimer;
 //			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
-		if (isButtonPressed(3)) {
-			turnPedestrianLight = 1;
-		}
+//		if (isButtonPressed(3)) {
+//			turnPedestrianLight = 1;
+//		}
 
 
 		if(isButtonPressed(0)) {
@@ -126,9 +166,9 @@ void fsm_automatic_run() {
 			counter2 = greenTimer;
 //			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
-		if (isButtonPressed(3)) {
-			turnPedestrianLight = 1;
-		}
+//		if (isButtonPressed(3)) {
+//			turnPedestrianLight = 1;
+//		}
 
 		if(isButtonPressed(0)) {
 			switchMode2();
