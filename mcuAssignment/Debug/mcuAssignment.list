@@ -9,27 +9,27 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .rodata       0000002c  080038e8  080038e8  000138e8  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08003914  08003914  0002002c  2**0
+  3 .ARM.extab    00000000  08003914  08003914  00020030  2**0
                   CONTENTS
-  4 .ARM          00000000  08003914  08003914  0002002c  2**0
+  4 .ARM          00000000  08003914  08003914  00020030  2**0
                   CONTENTS
-  5 .preinit_array 00000000  08003914  08003914  0002002c  2**0
+  5 .preinit_array 00000000  08003914  08003914  00020030  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   6 .init_array   00000004  08003914  08003914  00013914  2**2
                   CONTENTS, ALLOC, LOAD, DATA
   7 .fini_array   00000004  08003918  08003918  00013918  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         0000002c  20000000  0800391c  00020000  2**2
+  8 .data         00000030  20000000  0800391c  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000178  2000002c  08003948  0002002c  2**2
+  9 .bss          00000190  20000030  0800394c  00020030  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  200001a4  08003948  000201a4  2**0
+ 10 ._user_heap_stack 00000600  200001c0  0800394c  000201c0  2**0
                   ALLOC
- 11 .ARM.attributes 00000029  00000000  00000000  0002002c  2**0
+ 11 .ARM.attributes 00000029  00000000  00000000  00020030  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000d22e  00000000  00000000  00020055  2**0
+ 12 .debug_info   0000d22e  00000000  00000000  00020059  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00001eb0  00000000  00000000  0002d283  2**0
+ 13 .debug_abbrev 00001eb0  00000000  00000000  0002d287  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  14 .debug_aranges 00000c90  00000000  00000000  0002f138  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -60,7 +60,7 @@ Disassembly of section .text:
  8000122:	2301      	movs	r3, #1
  8000124:	7023      	strb	r3, [r4, #0]
  8000126:	bd10      	pop	{r4, pc}
- 8000128:	2000002c 	.word	0x2000002c
+ 8000128:	20000030 	.word	0x20000030
  800012c:	00000000 	.word	0x00000000
  8000130:	080038d0 	.word	0x080038d0
 
@@ -73,7 +73,7 @@ Disassembly of section .text:
  800013e:	f3af 8000 	nop.w
  8000142:	bd08      	pop	{r3, pc}
  8000144:	00000000 	.word	0x00000000
- 8000148:	20000030 	.word	0x20000030
+ 8000148:	20000034 	.word	0x20000034
  800014c:	080038d0 	.word	0x080038d0
 
 08000150 <__aeabi_dmul>:
@@ -586,8 +586,8 @@ Disassembly of section .text:
 0800075c <initStateForButton>:
 int button_flag[NUMBER_BUTTONS];
 
-uint16_t gpio_pin[NUMBER_BUTTONS] = {button1_Pin, button2_Pin, button3_Pin};
-GPIO_TypeDef* gpio_port[NUMBER_BUTTONS] = {button1_GPIO_Port, button2_GPIO_Port, button3_GPIO_Port};
+uint16_t gpio_pin[NUMBER_BUTTONS] = {buttonPedestrian_Pin, button1_Pin, button2_Pin, button3_Pin};
+GPIO_TypeDef* gpio_port[NUMBER_BUTTONS] = {buttonPedestrian_GPIO_Port, button1_GPIO_Port, button2_GPIO_Port, button3_GPIO_Port};
 
 void initStateForButton() {
  800075c:	b480      	push	{r7}
@@ -632,7 +632,7 @@ void initStateForButton() {
  80007a6:	3301      	adds	r3, #1
  80007a8:	607b      	str	r3, [r7, #4]
  80007aa:	687b      	ldr	r3, [r7, #4]
- 80007ac:	2b02      	cmp	r3, #2
+ 80007ac:	2b03      	cmp	r3, #3
  80007ae:	dddb      	ble.n	8000768 <initStateForButton+0xc>
 	 }
 }
@@ -642,12 +642,12 @@ void initStateForButton() {
  80007b6:	46bd      	mov	sp, r7
  80007b8:	bc80      	pop	{r7}
  80007ba:	4770      	bx	lr
- 80007bc:	2000008c 	.word	0x2000008c
- 80007c0:	20000098 	.word	0x20000098
- 80007c4:	200000bc 	.word	0x200000bc
- 80007c8:	20000080 	.word	0x20000080
- 80007cc:	200000b0 	.word	0x200000b0
- 80007d0:	200000a4 	.word	0x200000a4
+ 80007bc:	20000094 	.word	0x20000094
+ 80007c0:	200000a4 	.word	0x200000a4
+ 80007c4:	200000d4 	.word	0x200000d4
+ 80007c8:	20000084 	.word	0x20000084
+ 80007cc:	200000c4 	.word	0x200000c4
+ 80007d0:	200000b4 	.word	0x200000b4
 
 080007d4 <isButtonPressed>:
 
@@ -680,7 +680,7 @@ int isButtonPressed(int key_index) {
  80007fe:	bc80      	pop	{r7}
  8000800:	4770      	bx	lr
  8000802:	bf00      	nop
- 8000804:	200000a4 	.word	0x200000a4
+ 8000804:	200000b4 	.word	0x200000b4
 
 08000808 <subKeyProcess>:
 
@@ -700,7 +700,7 @@ void subKeyProcess(int key_index) {
  800081e:	46bd      	mov	sp, r7
  8000820:	bc80      	pop	{r7}
  8000822:	4770      	bx	lr
- 8000824:	200000a4 	.word	0x200000a4
+ 8000824:	200000b4 	.word	0x200000b4
 
 08000828 <getKeyInput>:
 
@@ -828,7 +828,7 @@ void getKeyInput() {
  800091e:	3301      	adds	r3, #1
  8000920:	607b      	str	r3, [r7, #4]
  8000922:	687b      	ldr	r3, [r7, #4]
- 8000924:	2b02      	cmp	r3, #2
+ 8000924:	2b03      	cmp	r3, #3
  8000926:	dd85      	ble.n	8000834 <getKeyInput+0xc>
 				}
 			}
@@ -841,13 +841,13 @@ void getKeyInput() {
  800092e:	46bd      	mov	sp, r7
  8000930:	bd80      	pop	{r7, pc}
  8000932:	bf00      	nop
- 8000934:	20000098 	.word	0x20000098
- 8000938:	2000008c 	.word	0x2000008c
- 800093c:	200000bc 	.word	0x200000bc
+ 8000934:	200000a4 	.word	0x200000a4
+ 8000938:	20000094 	.word	0x20000094
+ 800093c:	200000d4 	.word	0x200000d4
  8000940:	20000008 	.word	0x20000008
  8000944:	20000000 	.word	0x20000000
- 8000948:	20000080 	.word	0x20000080
- 800094c:	200000b0 	.word	0x200000b0
+ 8000948:	20000084 	.word	0x20000084
+ 800094c:	200000c4 	.word	0x200000c4
 
 08000950 <turnOffLed>:
 
@@ -1136,9 +1136,9 @@ void switchMode2() {
  8000b42:	bf00      	nop
  8000b44:	bd80      	pop	{r7, pc}
  8000b46:	bf00      	nop
- 8000b48:	20000050 	.word	0x20000050
- 8000b4c:	20000014 	.word	0x20000014
- 8000b50:	20000048 	.word	0x20000048
+ 8000b48:	20000054 	.word	0x20000054
+ 8000b4c:	20000018 	.word	0x20000018
+ 8000b50:	2000004c 	.word	0x2000004c
 
 08000b54 <fsm_automatic_run>:
 
@@ -1497,14 +1497,14 @@ void fsm_automatic_run() {
 };
  8000d84:	bf00      	nop
  8000d86:	bd80      	pop	{r7, pc}
- 8000d88:	20000050 	.word	0x20000050
- 8000d8c:	20000014 	.word	0x20000014
- 8000d90:	20000048 	.word	0x20000048
- 8000d94:	2000001c 	.word	0x2000001c
- 8000d98:	2000004c 	.word	0x2000004c
- 8000d9c:	20000060 	.word	0x20000060
- 8000da0:	20000058 	.word	0x20000058
- 8000da4:	20000018 	.word	0x20000018
+ 8000d88:	20000054 	.word	0x20000054
+ 8000d8c:	20000018 	.word	0x20000018
+ 8000d90:	2000004c 	.word	0x2000004c
+ 8000d94:	20000020 	.word	0x20000020
+ 8000d98:	20000050 	.word	0x20000050
+ 8000d9c:	20000064 	.word	0x20000064
+ 8000da0:	2000005c 	.word	0x2000005c
+ 8000da4:	2000001c 	.word	0x2000001c
 
 08000da8 <switchMode3>:
  */
@@ -1535,9 +1535,9 @@ void switchMode3() {
  8000dc6:	bf00      	nop
  8000dc8:	bd80      	pop	{r7, pc}
  8000dca:	bf00      	nop
- 8000dcc:	20000050 	.word	0x20000050
- 8000dd0:	20000018 	.word	0x20000018
- 8000dd4:	20000048 	.word	0x20000048
+ 8000dcc:	20000054 	.word	0x20000054
+ 8000dd0:	2000001c 	.word	0x2000001c
+ 8000dd4:	2000004c 	.word	0x2000004c
 
 08000dd8 <switchMode4>:
 
@@ -1564,9 +1564,9 @@ void switchMode4() {
  8000df6:	bf00      	nop
  8000df8:	bd80      	pop	{r7, pc}
  8000dfa:	bf00      	nop
- 8000dfc:	20000050 	.word	0x20000050
- 8000e00:	2000001c 	.word	0x2000001c
- 8000e04:	20000048 	.word	0x20000048
+ 8000dfc:	20000054 	.word	0x20000054
+ 8000e00:	20000020 	.word	0x20000020
+ 8000e04:	2000004c 	.word	0x2000004c
 
 08000e08 <fsm_manual_run>:
 
@@ -1954,12 +1954,12 @@ void fsm_manual_run() {
 };
  8001054:	bf00      	nop
  8001056:	bd80      	pop	{r7, pc}
- 8001058:	20000050 	.word	0x20000050
- 800105c:	20000060 	.word	0x20000060
- 8001060:	20000014 	.word	0x20000014
- 8001064:	2000007c 	.word	0x2000007c
- 8001068:	20000018 	.word	0x20000018
- 800106c:	2000001c 	.word	0x2000001c
+ 8001058:	20000054 	.word	0x20000054
+ 800105c:	20000064 	.word	0x20000064
+ 8001060:	20000018 	.word	0x20000018
+ 8001064:	20000080 	.word	0x20000080
+ 8001068:	2000001c 	.word	0x2000001c
+ 800106c:	20000020 	.word	0x20000020
 
 08001070 <main>:
 /**
@@ -2084,9 +2084,9 @@ int main(void)
  8001114:	f3af 8000 	nop.w
  8001118:	33333333 	.word	0x33333333
  800111c:	3fe33333 	.word	0x3fe33333
- 8001120:	20000110 	.word	0x20000110
- 8001124:	200000c8 	.word	0x200000c8
- 8001128:	20000050 	.word	0x20000050
+ 8001120:	2000012c 	.word	0x2000012c
+ 8001124:	200000e4 	.word	0x200000e4
+ 8001128:	20000054 	.word	0x20000054
 
 0800112c <SystemClock_Config>:
 /**
@@ -2291,7 +2291,7 @@ static void MX_TIM2_Init(void)
  8001242:	46bd      	mov	sp, r7
  8001244:	bd80      	pop	{r7, pc}
  8001246:	bf00      	nop
- 8001248:	20000110 	.word	0x20000110
+ 8001248:	2000012c 	.word	0x2000012c
 
 0800124c <MX_TIM3_Init>:
   * @brief TIM3 Initialization Function
@@ -2449,7 +2449,7 @@ static void MX_TIM3_Init(void)
  800132e:	46bd      	mov	sp, r7
  8001330:	bd80      	pop	{r7, pc}
  8001332:	bf00      	nop
- 8001334:	200000c8 	.word	0x200000c8
+ 8001334:	200000e4 	.word	0x200000e4
  8001338:	40000400 	.word	0x40000400
 
 0800133c <MX_USART2_UART_Init>:
@@ -2516,7 +2516,7 @@ static void MX_USART2_UART_Init(void)
  8001382:	bf00      	nop
  8001384:	bd80      	pop	{r7, pc}
  8001386:	bf00      	nop
- 8001388:	20000158 	.word	0x20000158
+ 8001388:	20000174 	.word	0x20000174
  800138c:	40004400 	.word	0x40004400
 
 08001390 <MX_GPIO_Init>:
@@ -2791,8 +2791,8 @@ void setTimer1(int duration) {
  8001526:	bc80      	pop	{r7}
  8001528:	4770      	bx	lr
  800152a:	bf00      	nop
- 800152c:	20000054 	.word	0x20000054
- 8001530:	20000058 	.word	0x20000058
+ 800152c:	20000058 	.word	0x20000058
+ 8001530:	2000005c 	.word	0x2000005c
 
 08001534 <setTimer2>:
 
@@ -2816,8 +2816,8 @@ void setTimer2(int duration) {
  800154e:	bc80      	pop	{r7}
  8001550:	4770      	bx	lr
  8001552:	bf00      	nop
- 8001554:	2000005c 	.word	0x2000005c
- 8001558:	20000060 	.word	0x20000060
+ 8001554:	20000060 	.word	0x20000060
+ 8001558:	20000064 	.word	0x20000064
 
 0800155c <setTimer4>:
 void setTimer3(int duration) {
@@ -2845,8 +2845,8 @@ void setTimer4(int duration) {
  8001576:	bc80      	pop	{r7}
  8001578:	4770      	bx	lr
  800157a:	bf00      	nop
- 800157c:	2000006c 	.word	0x2000006c
- 8001580:	20000070 	.word	0x20000070
+ 800157c:	20000070 	.word	0x20000070
+ 8001580:	20000074 	.word	0x20000074
 
 08001584 <setTimer5>:
 
@@ -2870,8 +2870,8 @@ void setTimer5(int duration) {
  800159e:	bc80      	pop	{r7}
  80015a0:	4770      	bx	lr
  80015a2:	bf00      	nop
- 80015a4:	20000074 	.word	0x20000074
- 80015a8:	20000078 	.word	0x20000078
+ 80015a4:	20000078 	.word	0x20000078
+ 80015a8:	2000007c 	.word	0x2000007c
 
 080015ac <timerRun>:
 
@@ -2996,16 +2996,16 @@ void timerRun() {
  8001652:	46bd      	mov	sp, r7
  8001654:	bc80      	pop	{r7}
  8001656:	4770      	bx	lr
- 8001658:	20000054 	.word	0x20000054
- 800165c:	20000058 	.word	0x20000058
- 8001660:	2000005c 	.word	0x2000005c
- 8001664:	20000060 	.word	0x20000060
- 8001668:	20000064 	.word	0x20000064
- 800166c:	20000068 	.word	0x20000068
- 8001670:	2000006c 	.word	0x2000006c
- 8001674:	20000070 	.word	0x20000070
- 8001678:	20000074 	.word	0x20000074
- 800167c:	20000078 	.word	0x20000078
+ 8001658:	20000058 	.word	0x20000058
+ 800165c:	2000005c 	.word	0x2000005c
+ 8001660:	20000060 	.word	0x20000060
+ 8001664:	20000064 	.word	0x20000064
+ 8001668:	20000068 	.word	0x20000068
+ 800166c:	2000006c 	.word	0x2000006c
+ 8001670:	20000070 	.word	0x20000070
+ 8001674:	20000074 	.word	0x20000074
+ 8001678:	20000078 	.word	0x20000078
+ 800167c:	2000007c 	.word	0x2000007c
 
 08001680 <HAL_MspInit>:
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
@@ -3480,7 +3480,7 @@ void TIM2_IRQHandler(void)
  800188e:	bf00      	nop
  8001890:	bd80      	pop	{r7, pc}
  8001892:	bf00      	nop
- 8001894:	20000110 	.word	0x20000110
+ 8001894:	2000012c 	.word	0x2000012c
 
 08001898 <EXTI15_10_IRQHandler>:
 
@@ -3602,13 +3602,13 @@ LoopFillZerobss:
   ldr r0, =_sdata
  80018e8:	20000000 	.word	0x20000000
   ldr r1, =_edata
- 80018ec:	2000002c 	.word	0x2000002c
+ 80018ec:	20000030 	.word	0x20000030
   ldr r2, =_sidata
  80018f0:	0800391c 	.word	0x0800391c
   ldr r2, =_sbss
- 80018f4:	2000002c 	.word	0x2000002c
+ 80018f4:	20000030 	.word	0x20000030
   ldr r4, =_ebss
- 80018f8:	200001a4 	.word	0x200001a4
+ 80018f8:	200001c0 	.word	0x200001c0
 
 080018fc <ADC1_2_IRQHandler>:
  * @retval : None
@@ -3728,9 +3728,9 @@ __weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
  800197a:	3708      	adds	r7, #8
  800197c:	46bd      	mov	sp, r7
  800197e:	bd80      	pop	{r7, pc}
- 8001980:	20000020 	.word	0x20000020
- 8001984:	20000028 	.word	0x20000028
- 8001988:	20000024 	.word	0x20000024
+ 8001980:	20000024 	.word	0x20000024
+ 8001984:	2000002c 	.word	0x2000002c
+ 8001988:	20000028 	.word	0x20000028
 
 0800198c <HAL_IncTick>:
   * @note This function is declared as __weak to be overwritten in case of other
@@ -3755,8 +3755,8 @@ __weak void HAL_IncTick(void)
  80019a2:	46bd      	mov	sp, r7
  80019a4:	bc80      	pop	{r7}
  80019a6:	4770      	bx	lr
- 80019a8:	20000028 	.word	0x20000028
- 80019ac:	200001a0 	.word	0x200001a0
+ 80019a8:	2000002c 	.word	0x2000002c
+ 80019ac:	200001bc 	.word	0x200001bc
 
 080019b0 <HAL_GetTick>:
   * @note  This function is declared as __weak to be overwritten in case of other
@@ -3775,7 +3775,7 @@ __weak uint32_t HAL_GetTick(void)
  80019ba:	46bd      	mov	sp, r7
  80019bc:	bc80      	pop	{r7}
  80019be:	4770      	bx	lr
- 80019c0:	200001a0 	.word	0x200001a0
+ 80019c0:	200001bc 	.word	0x200001bc
 
 080019c4 <HAL_Delay>:
   *       implementations in user file.
@@ -3828,7 +3828,7 @@ __weak void HAL_Delay(uint32_t Delay)
  8001a02:	46bd      	mov	sp, r7
  8001a04:	bd80      	pop	{r7, pc}
  8001a06:	bf00      	nop
- 8001a08:	20000028 	.word	0x20000028
+ 8001a08:	2000002c 	.word	0x2000002c
 
 08001a0c <__NVIC_SetPriorityGrouping>:
            In case of a conflict between priority grouping and available
@@ -6078,8 +6078,8 @@ if (((RCC_ClkInitStruct->ClockType) & RCC_CLOCKTYPE_PCLK1) == RCC_CLOCKTYPE_PCLK
  8002694:	40022000 	.word	0x40022000
  8002698:	40021000 	.word	0x40021000
  800269c:	080038e8 	.word	0x080038e8
- 80026a0:	20000020 	.word	0x20000020
- 80026a4:	20000024 	.word	0x20000024
+ 80026a0:	20000024 	.word	0x20000024
+ 80026a4:	20000028 	.word	0x20000028
 
 080026a8 <HAL_RCC_GetSysClockFreq>:
   *         right SYSCLK value. Otherwise, any configuration based on this function will be incorrect.
@@ -6233,7 +6233,7 @@ uint32_t HAL_RCC_GetHCLKFreq(void)
  800275a:	46bd      	mov	sp, r7
  800275c:	bc80      	pop	{r7}
  800275e:	4770      	bx	lr
- 8002760:	20000020 	.word	0x20000020
+ 8002760:	20000024 	.word	0x20000024
 
 08002764 <HAL_RCC_GetPCLK1Freq>:
   * @note   Each time PCLK1 changes, this function must be called to update the
@@ -6325,7 +6325,7 @@ static void RCC_Delay(uint32_t mdelay)
  80027e2:	46bd      	mov	sp, r7
  80027e4:	bc80      	pop	{r7}
  80027e6:	4770      	bx	lr
- 80027e8:	20000020 	.word	0x20000020
+ 80027e8:	20000024 	.word	0x20000024
  80027ec:	10624dd3 	.word	0x10624dd3
 
 080027f0 <HAL_TIM_Base_Init>:
