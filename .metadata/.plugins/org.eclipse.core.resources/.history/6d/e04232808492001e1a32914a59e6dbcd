@@ -22,8 +22,8 @@ void switchMode2() {
 void fsm_pedestrian(){
 	switch(statusPedestrian){
 	case PES_ON:
+		value_buzzer = 3000;
 		turnPedestrian_flag = 1;
-
 		break;
 	case PES_OFF:
 		turnPedestrian_flag = 0;
@@ -111,9 +111,8 @@ void fsm_automatic_run() {
 //			statusPedestrian = RED_ON;
 //			setTimer6(redTimer*100);
 			statusPedestrian = PES_ON;
-			setTimer3((greenTimer+yellowTimer)*100 - 400);
+			setTimer3((greenTimer+yellowTimer)*100);
 			setTimer6((3*redTimer)*100);
-			value_buzzer = 3000;
 		}
 
 		if(timer2_flag == 1) {

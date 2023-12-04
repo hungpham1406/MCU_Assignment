@@ -46,8 +46,6 @@ extern int greenTimer;
 extern int turnPedestrian_flag;
 extern int statusPedestrian;
 
-extern int value_buzzer;
-
 // for uart
 # define MAX_BUFFER_SIZE 100
 extern char str[MAX_BUFFER_SIZE];

@@ -53,5 +53,7 @@ extern int value_buzzer;
 extern char str[MAX_BUFFER_SIZE];
 extern UART_HandleTypeDef huart2;
 
+void buzzer_activate();
+
 
 #endif /* INC_GLOBAL_H_ */

@@ -19,11 +19,17 @@ void switchMode2() {
 //	updateLedBufferVal(counter1/10, 2, counter1%10, 2);
 }
 
+void buzzer_activate() {
+	__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
+	__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*value_buzzer));
+	value_buzzer = value_buzzer - 500;
+}
+
 void fsm_pedestrian(){
 	switch(statusPedestrian){
 	case PES_ON:
 		turnPedestrian_flag = 1;
-
+		if(timer3_flag == 1) buzzer_activate();
 		break;
 	case PES_OFF:
 		turnPedestrian_flag = 0;

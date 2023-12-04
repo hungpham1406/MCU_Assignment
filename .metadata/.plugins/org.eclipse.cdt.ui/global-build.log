@@ -1,0 +1,31 @@
+16:18:19 **** Incremental Build of configuration Debug for project mcuAssignment ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/displayLed.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/displayLed.d" -MT"Core/Src/displayLed.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/displayLed.o"
+arm-none-eabi-gcc "../Core/Src/fsm_automatic.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm_automatic.d" -MT"Core/Src/fsm_automatic.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/fsm_automatic.o"
+arm-none-eabi-gcc "../Core/Src/fsm_manual.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm_manual.d" -MT"Core/Src/fsm_manual.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/fsm_manual.o"
+arm-none-eabi-gcc "../Core/Src/global.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/global.d" -MT"Core/Src/global.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/global.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:111:3: warning: implicit declaration of function 'initStateForButton' [-Wimplicit-function-declaration]
+  111 |   initStateForButton();
+      |   ^~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:117:4: warning: implicit declaration of function 'fsm_pedestrian' [-Wimplicit-function-declaration]
+  117 |    fsm_pedestrian();
+      |    ^~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "mcuAssignment.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\Huy\Desktop\New folder\MCU_Assignment\mcuAssignment\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mcuAssignment.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: mcuAssignment.elf
+ 
+arm-none-eabi-size   mcuAssignment.elf 
+arm-none-eabi-objdump -h -S  mcuAssignment.elf  > "mcuAssignment.list"
+arm-none-eabi-objcopy  -O ihex  mcuAssignment.elf  "mcuAssignment.hex"
+arm-none-eabi-objcopy  -O binary  mcuAssignment.elf  "mcuAssignment.bin"
+   text	   data	    bss	    dec	    hex	filename
+  18584	    156	   2084	  20824	   5158	mcuAssignment.elf
+Finished building: default.size.stdout
+ 
+Finished building: mcuAssignment.hex
+Finished building: mcuAssignment.bin
+ 
+ 
+Finished building: mcuAssignment.list
+ 

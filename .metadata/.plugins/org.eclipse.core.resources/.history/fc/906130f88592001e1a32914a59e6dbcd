@@ -21,4 +21,10 @@ int turnPedestrian_flag = 0;
 int statusPedestrian = 0;
 int value_buzzer = 0;
 
+void buzzer_activate() {
+	__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
+	__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*value_buzzer));
+	value_buzzer = value_buzzer - 500;
+}
+
 char str[MAX_BUFFER_SIZE]={0};

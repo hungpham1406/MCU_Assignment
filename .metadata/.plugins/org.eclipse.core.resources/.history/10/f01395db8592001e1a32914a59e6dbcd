@@ -23,7 +23,7 @@ void fsm_pedestrian(){
 	switch(statusPedestrian){
 	case PES_ON:
 		turnPedestrian_flag = 1;
-
+		if(timer3_flag == 1) buzzer_activate();
 		break;
 	case PES_OFF:
 		turnPedestrian_flag = 0;
