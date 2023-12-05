@@ -47,6 +47,7 @@ extern int turnPedestrian_flag;
 extern int statusPedestrian;
 
 extern int value_buzzer;
+extern TIM_HandleTypeDef htim3;
 
 // for uart
 # define MAX_BUFFER_SIZE 100

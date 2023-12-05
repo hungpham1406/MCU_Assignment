@@ -59,6 +59,11 @@ void fsm_automatic_run() {
 			setTimer2(100);
 			counter1--;
 			counter2--;
+			if(turnPedestrian_flag == 1) {
+				__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*value_buzzer));
+				value_buzzer = value_buzzer - value_buzzer/(greenTimer+yellowTimer);
+			}
 		}
 
 		if(timer1_flag == 1) {
@@ -75,12 +80,18 @@ void fsm_automatic_run() {
 		break;
 	case RED1_YELLOW2_AUTO:
 		displayLed(RED1_YELLOW2);
+
 		if(timer2_flag == 1) {
 			int len= sprintf(str,"LED RED      = %d    LED YELLOW   = %d\r\n",counter1,counter2);
 			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			setTimer2(100);
 			counter1--;
 			counter2--;
+			if(turnPedestrian_flag == 1) {
+				__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*value_buzzer));
+				value_buzzer = value_buzzer - value_buzzer/(greenTimer+yellowTimer);
+			}
 		}
 
 		if(timer1_flag == 1) {
@@ -99,9 +110,13 @@ void fsm_automatic_run() {
 		if (isButtonPressed(3)) {
 			statusPedestrian = PES_ON;
 //			setTimer3((redTimer+greenTimer+yellowTimer)*100 - 400);
-			setTimer3(600);
 			setTimer6((3*redTimer)*100);
 			value_buzzer = 2000;
+		}
+
+		if(turnPedestrian_flag == 1) {
+			__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
+			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0);
 		}
 
 		if(timer2_flag == 1) {
@@ -110,6 +125,10 @@ void fsm_automatic_run() {
 			setTimer2(100);
 			counter1--;
 			counter2--;
+//			if(turnPedestrian_flag == 1) {
+//						__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
+//						__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0);
+//					}
 		}
 
 		if(timer1_flag == 1) {
@@ -126,12 +145,20 @@ void fsm_automatic_run() {
 	case YELLOW1_RED2_AUTO:
 		displayLed(YELLOW1_RED2);
 
+		if(turnPedestrian_flag == 1) {
+			__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
+			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0);
+		}
 		if(timer2_flag == 1) {
 			int len= sprintf(str,"LED YELLOW   = %d    LED RED      = %d\r\n",counter1,counter2);
 			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			setTimer2(100);
 			counter1--;
 			counter2--;
+//			if(turnPedestrian_flag == 1) {
+//						__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
+//						__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0);
+//					}
 		}
 
 		if(timer1_flag == 1) {
