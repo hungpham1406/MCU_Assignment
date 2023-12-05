@@ -112,16 +112,17 @@ int main(void)
   status = INIT;
   while (1)
   {
+//	  if(timer3_flag == 1) buzzer_activate();
 	  fsm_automatic_run();
 	  fsm_manual_run();
 	  fsm_pedestrian();
-	  if(timer3_flag == 1) buzzer_activate();
-//	  for(x = 3000; x>50; x=x-200)
-//	  {
-//		  __HAL_TIM_SET_AUTORELOAD(&htim3, 5*x);
-//		  __HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*x));
-//			HAL_Delay(250);
-//	  }
+	  int x;
+	  for(x = 3000; x>50; x=x-200)
+	  {
+		  __HAL_TIM_SET_AUTORELOAD(&htim3, 5*x);
+		  __HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*x));
+			HAL_Delay(250);
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

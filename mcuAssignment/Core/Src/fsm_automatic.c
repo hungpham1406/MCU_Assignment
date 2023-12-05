@@ -16,7 +16,6 @@ void switchMode2() {
 	setTimer2(100);
 	setTimer4(25);
 	statusPedestrian = PES_OFF;
-//	updateLedBufferVal(counter1/10, 2, counter1%10, 2);
 }
 
 void fsm_pedestrian(){
@@ -42,14 +41,11 @@ void fsm_pedestrian(){
 void fsm_automatic_run() {
 	switch(status) {
 	case INIT:
-		//turnOffLed();
 		statusPedestrian = PES_OFF;
 		status = RED1_GREEN2_AUTO;
 		counter1 = redTimer;
 		counter2 = greenTimer;
 
-
-//		updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		setTimer1(greenTimer*100);
 		setTimer2(100);
 		setTimer5(25);
@@ -59,11 +55,10 @@ void fsm_automatic_run() {
 
 		if(timer2_flag == 1) {
 			int len= sprintf(str,"LED RED      = %d    LED GREEN    = %d\r\n",counter1,counter2);
-			 HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
+			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			setTimer2(100);
 			counter1--;
 			counter2--;
-//			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(timer1_flag == 1) {
@@ -71,7 +66,6 @@ void fsm_automatic_run() {
 			setTimer1((redTimer-greenTimer)*100);
 			counter1 = redTimer-greenTimer;
 			counter2 = yellowTimer;
-//			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(isButtonPressed(0)) {
@@ -87,7 +81,6 @@ void fsm_automatic_run() {
 			setTimer2(100);
 			counter1--;
 			counter2--;
-//			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(timer1_flag == 1) {
@@ -95,11 +88,7 @@ void fsm_automatic_run() {
 			setTimer1(greenTimer*100);
 			counter1 = greenTimer;
 			counter2 = redTimer;
-//			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
-//		if (isButtonPressed(3)) {
-//					turnPedestrianLight = 1;
-//				}
 
 		if(isButtonPressed(0)) {
 			switchMode2();
@@ -108,21 +97,19 @@ void fsm_automatic_run() {
 	case GREEN1_RED2_AUTO:
 		displayLed(GREEN1_RED2);
 		if (isButtonPressed(3)) {
-//			statusPedestrian = RED_ON;
-//			setTimer6(redTimer*100);
 			statusPedestrian = PES_ON;
-			setTimer3((greenTimer+yellowTimer)*100 - 400);
+//			setTimer3((redTimer+greenTimer+yellowTimer)*100 - 400);
+			setTimer3(600);
 			setTimer6((3*redTimer)*100);
-			value_buzzer = 3000;
+			value_buzzer = 2000;
 		}
 
 		if(timer2_flag == 1) {
 			int len= sprintf(str,"LED GREEN    = %d    LED RED      = %d\r\n",counter1,counter2);
-			 HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
+			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			setTimer2(100);
 			counter1--;
 			counter2--;
-//			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(timer1_flag == 1) {
@@ -130,12 +117,7 @@ void fsm_automatic_run() {
 			setTimer1((redTimer-greenTimer)*100);
 			counter1 = yellowTimer;
 			counter2 = redTimer-greenTimer;
-//			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
-//		if (isButtonPressed(3)) {
-//			turnPedestrianLight = 1;
-//		}
-
 
 		if(isButtonPressed(0)) {
 			switchMode2();
@@ -146,11 +128,10 @@ void fsm_automatic_run() {
 
 		if(timer2_flag == 1) {
 			int len= sprintf(str,"LED YELLOW   = %d    LED RED      = %d\r\n",counter1,counter2);
-			 HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
+			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			setTimer2(100);
 			counter1--;
 			counter2--;
-//			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(timer1_flag == 1) {
@@ -158,11 +139,7 @@ void fsm_automatic_run() {
 			setTimer1(greenTimer*100);
 			counter1 = redTimer;
 			counter2 = greenTimer;
-//			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
-//		if (isButtonPressed(3)) {
-//			turnPedestrianLight = 1;
-//		}
 
 		if(isButtonPressed(0)) {
 			switchMode2();
