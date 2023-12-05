@@ -116,6 +116,7 @@ int main(void)
 	  fsm_automatic_run();
 	  fsm_manual_run();
 	  fsm_pedestrian();
+//	  int x;
 //	  for(x = 3000; x>50; x=x-200)
 //	  {
 //		  __HAL_TIM_SET_AUTORELOAD(&htim3, 5*x);

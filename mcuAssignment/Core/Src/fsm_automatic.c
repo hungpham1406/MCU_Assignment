@@ -98,9 +98,10 @@ void fsm_automatic_run() {
 		displayLed(GREEN1_RED2);
 		if (isButtonPressed(3)) {
 			statusPedestrian = PES_ON;
-			setTimer3((timer1_counter+greenTimer+yellowTimer)*100 - 400);
+//			setTimer3((redTimer+greenTimer+yellowTimer)*100 - 400);
+			setTimer3(600);
 			setTimer6((3*redTimer)*100);
-			value_buzzer = 3000;
+			value_buzzer = 2000;
 		}
 
 		if(timer2_flag == 1) {
