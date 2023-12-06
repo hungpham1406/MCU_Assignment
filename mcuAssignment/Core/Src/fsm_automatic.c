@@ -7,15 +7,16 @@
 
 #include "fsm_automatic.h"
 
-
 void switchMode2() {
 	int len= sprintf(str,"%s\r\n","Welcome to Manual Mode");
 	HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 	status = RED_MAN;
-	counter1 = redTimer;
-	setTimer2(100);
-	setTimer4(25);
 	statusPedestrian = PES_OFF;
+}
+
+void buzzer_activate(int value1, int value2) {
+	__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value1);
+	__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*value2));
 }
 
 void fsm_pedestrian(){
@@ -33,7 +34,7 @@ void fsm_pedestrian(){
 		break;
 	}
 
-	if(timer6_flag == 1) {
+	if(timer3_flag == 1) {
 		statusPedestrian = PES_OFF;
 	}
 }
@@ -48,7 +49,6 @@ void fsm_automatic_run() {
 
 		setTimer1(greenTimer*100);
 		setTimer2(100);
-		setTimer5(25);
 		break;
 	case RED1_GREEN2_AUTO:
 		displayLed(RED1_GREEN2);
@@ -60,10 +60,10 @@ void fsm_automatic_run() {
 			counter1--;
 			counter2--;
 			if(turnPedestrian_flag == 1) {
-				__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
-				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*value_buzzer));
-				value_buzzer = value_buzzer - value_buzzer/(greenTimer+yellowTimer);
+				buzzer_activate(value_buzzer, value_buzzer);
+				value_buzzer = value_buzzer - BUZZER_MAX_VALUE/(greenTimer+yellowTimer);
 			}
+			else buzzer_activate(value_buzzer, 0);
 		}
 
 		if(timer1_flag == 1) {
@@ -72,8 +72,10 @@ void fsm_automatic_run() {
 			counter1 = redTimer-greenTimer;
 			counter2 = yellowTimer;
 		}
-
-		if(isButtonPressed(0)) {
+		if(turnPedestrian_flag) {
+			isButtonPressed(0);
+		}
+		else if(isButtonPressed(0)) {
 			switchMode2();
 		}
 
@@ -88,10 +90,10 @@ void fsm_automatic_run() {
 			counter1--;
 			counter2--;
 			if(turnPedestrian_flag == 1) {
-				__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
-				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*value_buzzer));
-				value_buzzer = value_buzzer - value_buzzer/(greenTimer+yellowTimer);
+				buzzer_activate(value_buzzer, value_buzzer);
+				value_buzzer = value_buzzer - BUZZER_MAX_VALUE/(greenTimer+yellowTimer);
 			}
+			else buzzer_activate(value_buzzer, 0);
 		}
 
 		if(timer1_flag == 1) {
@@ -101,7 +103,10 @@ void fsm_automatic_run() {
 			counter2 = redTimer;
 		}
 
-		if(isButtonPressed(0)) {
+		if(turnPedestrian_flag) {
+			isButtonPressed(0);
+		}
+		else if(isButtonPressed(0)) {
 			switchMode2();
 		}
 		break;
@@ -109,14 +114,12 @@ void fsm_automatic_run() {
 		displayLed(GREEN1_RED2);
 		if (isButtonPressed(3)) {
 			statusPedestrian = PES_ON;
-//			setTimer3((redTimer+greenTimer+yellowTimer)*100 - 400);
-			setTimer6((3*redTimer)*100);
-			value_buzzer = 2000;
+			setTimer3((3*redTimer)*100);
+			value_buzzer = BUZZER_MAX_VALUE;
 		}
 
 		if(turnPedestrian_flag == 1) {
-			__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
-			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0);
+			buzzer_activate(value_buzzer, 0);
 		}
 
 		if(timer2_flag == 1) {
@@ -125,10 +128,6 @@ void fsm_automatic_run() {
 			setTimer2(100);
 			counter1--;
 			counter2--;
-//			if(turnPedestrian_flag == 1) {
-//						__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
-//						__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0);
-//					}
 		}
 
 		if(timer1_flag == 1) {
@@ -138,7 +137,10 @@ void fsm_automatic_run() {
 			counter2 = redTimer-greenTimer;
 		}
 
-		if(isButtonPressed(0)) {
+		if(turnPedestrian_flag) {
+			isButtonPressed(0);
+		}
+		else if(isButtonPressed(0)) {
 			switchMode2();
 		}
 		break;
@@ -146,8 +148,7 @@ void fsm_automatic_run() {
 		displayLed(YELLOW1_RED2);
 
 		if(turnPedestrian_flag == 1) {
-			__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
-			__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0);
+			buzzer_activate(value_buzzer, 0);
 		}
 		if(timer2_flag == 1) {
 			int len= sprintf(str,"LED YELLOW   = %d    LED RED      = %d\r\n",counter1,counter2);
@@ -155,10 +156,6 @@ void fsm_automatic_run() {
 			setTimer2(100);
 			counter1--;
 			counter2--;
-//			if(turnPedestrian_flag == 1) {
-//						__HAL_TIM_SET_AUTORELOAD(&htim3, 5*value_buzzer);
-//						__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0);
-//					}
 		}
 
 		if(timer1_flag == 1) {
@@ -168,7 +165,10 @@ void fsm_automatic_run() {
 			counter2 = greenTimer;
 		}
 
-		if(isButtonPressed(0)) {
+		if(turnPedestrian_flag) {
+			isButtonPressed(0);
+		}
+		else if(isButtonPressed(0)) {
 			switchMode2();
 		}
 		break;

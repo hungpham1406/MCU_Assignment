@@ -10,18 +10,10 @@
 
 void switchMode3() {
 	status = YELLOW_MAN;
-	counter1 = yellowTimer;
-	setTimer2(100);
-	setTimer4(25);
-//	updateLedBufferVal(counter1/10, 3, counter1%10, 3);
 }
 
 void switchMode4() {
 	status = GREEN_MAN;
-	counter1 = greenTimer;
-	setTimer2(100);
-	setTimer4(25);
-//	updateLedBufferVal(counter1/10, 4, counter1%10, 4);
 }
 
 void fsm_manual_run() {
@@ -30,10 +22,9 @@ void fsm_manual_run() {
 	case RED_MAN:
 		displayLed(RED_MAN);
 
-		if(timer2_flag == 1) {
-			setTimer2(100);
-//			updateLedBufferVal(counter1/10, 2, counter1%10, 2);
-		}
+//		if(timer2_flag == 1) {
+//			setTimer2(100);
+//		}
 
 		if(isButtonPressed(0)) {
 			switchMode3();
@@ -42,7 +33,6 @@ void fsm_manual_run() {
 		if(isButtonPressed(1)) {
 			status = RED_MAN_MODIFY;
 			timerMan = redTimer;
-//			updateLedBufferVal(timerMan/10, 2, timerMan%10, 2);
 		}
 		break;
 	case RED_MAN_MODIFY:
@@ -57,7 +47,6 @@ void fsm_manual_run() {
 			int len= sprintf(str,"LED RED    =  %d\r\n",timerMan);
 			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			if(timerMan > 99) timerMan = 1;
-//			updateLedBufferVal(timerMan/10, 2, timerMan%10, 2);
 		}
 
 		if(isButtonPressed(2)) {
@@ -72,10 +61,9 @@ void fsm_manual_run() {
 	case YELLOW_MAN:
 		displayLed(YELLOW_MAN);
 
-		if(timer2_flag == 1) {
-			setTimer2(100);
-//			updateLedBufferVal(counter1/10, 3, counter1%10, 3);
-		}
+//		if(timer2_flag == 1) {
+//			setTimer2(100);
+//		}
 
 		if(isButtonPressed(0)) {
 			switchMode4();
@@ -84,7 +72,6 @@ void fsm_manual_run() {
 		if(isButtonPressed(1)) {
 			status = YELLOW_MAN_MODIFY;
 			timerMan = yellowTimer;
-//			updateLedBufferVal(timerMan/10, 3, timerMan%10, 3);
 		}
 		break;
 	case YELLOW_MAN_MODIFY:
@@ -99,7 +86,6 @@ void fsm_manual_run() {
 			int len= sprintf(str,"LED YELLOW =  %d\r\n",timerMan);
 			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			if(timerMan >= redTimer) timerMan = 1;
-//			updateLedBufferVal(timerMan/10, 3, timerMan%10, 3);
 		}
 
 		if(isButtonPressed(2)) {
@@ -113,10 +99,9 @@ void fsm_manual_run() {
 	case GREEN_MAN:
 		displayLed(GREEN_MAN);
 
-		if(timer2_flag == 1) {
-			setTimer2(100);
-//			updateLedBufferVal(counter1/10, 4, counter1%10, 4);
-		}
+//		if(timer2_flag == 1) {
+//			setTimer2(100);
+//		}
 
 		if(isButtonPressed(0)) {
 			status = INIT;
@@ -125,7 +110,6 @@ void fsm_manual_run() {
 		if(isButtonPressed(1)) {
 			status = GREEN_MAN_MODIFY;
 			timerMan = greenTimer;
-//			updateLedBufferVal(timerMan/10, 4, timerMan%10, 4);
 		}
 		break;
 	case GREEN_MAN_MODIFY:
@@ -140,7 +124,6 @@ void fsm_manual_run() {
 			int len= sprintf(str,"LED GREEN  =  %d\r\n",timerMan);
 			HAL_UART_Transmit(&huart2,(uint8_t*) str, len, 1000);
 			if(timerMan >= redTimer) timerMan = 1;
-//			updateLedBufferVal(timerMan/10, 4, timerMan%10, 4);
 		}
 
 		if(isButtonPressed(2)) {

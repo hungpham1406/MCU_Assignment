@@ -12,6 +12,6 @@
 
 void fsm_automatic_run();
 void switchMode2();
-
+void buzzer_activate(int value1, int value2);
 
 #endif /* INC_FSM_AUTOMATIC_H_ */

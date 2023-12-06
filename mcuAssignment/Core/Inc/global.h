@@ -46,6 +46,7 @@ extern int greenTimer;
 extern int turnPedestrian_flag;
 extern int statusPedestrian;
 
+#define BUZZER_MAX_VALUE		2000
 extern int value_buzzer;
 extern TIM_HandleTypeDef htim3;
 
