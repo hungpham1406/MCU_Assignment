@@ -19,12 +19,14 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
+
 #include "global.h"
 #include "fsm_automatic.h"
 #include "fsm_manual.h"
+#include "scheduler.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -70,10 +72,27 @@ static void MX_TIM3_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
+
+void getButton(){
+	getKeyInput();
+}
+void getTimerRun(){
+	timerRun();
+}
+void get_fsm_automatic_run(){
+	fsm_automatic_run();
+}
+void get_fsm_manual_run(){
+	fsm_manual_run();
+}
+void get_fsm_pedestrian(){
+	fsm_pedestrian();
+}
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	initStateForButton();
+	status = INIT;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -100,24 +119,28 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT (& htim2 ) ;
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+
+
+  SCH_Init();
+  SCH_Add_Task(getTimerRun,0, 10);
+  SCH_Add_Task(getKeyInput,0, 10);
+  SCH_Add_Task(get_fsm_automatic_run, 0,10);
+  SCH_Add_Task(get_fsm_manual_run, 0, 10);
+  SCH_Add_Task(get_fsm_pedestrian, 0, 10);
+
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  initStateForButton();
-  status = INIT;
+
+
+
   while (1)
   {
-	  fsm_automatic_run();
-	  fsm_manual_run();
-	  fsm_pedestrian();
-//	  int x;
-//	  for(x = 3000; x>50; x=x-200)
-//	  {
-//		  __HAL_TIM_SET_AUTORELOAD(&htim3, 5*x);
-//		  __HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1, 0.6 * (5*x));
-//			HAL_Delay(250);
-//	  }
+
+	  	  SCH_Dispatch_Tasks();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -367,8 +390,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
  void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim ){
-	 timerRun();
-	 getKeyInput();
+	 SCH_Update();
 }
 /* USER CODE END 4 */
 
