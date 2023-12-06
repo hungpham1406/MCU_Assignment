@@ -22,7 +22,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-
 #include "global.h"
 #include "fsm_automatic.h"
 #include "fsm_manual.h"
