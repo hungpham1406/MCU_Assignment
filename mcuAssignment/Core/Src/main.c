@@ -122,11 +122,11 @@ int main(void)
 
 
   SCH_Init();
-  SCH_Add_Task(getTimerRun,0, 10);
-  SCH_Add_Task(getKeyInput,0, 10);
-  SCH_Add_Task(get_fsm_automatic_run, 0,10);
-  SCH_Add_Task(get_fsm_manual_run, 0, 10);
-  SCH_Add_Task(get_fsm_pedestrian, 0, 10);
+  SCH_Add_Task(getTimerRun,0, 1);
+  SCH_Add_Task(getKeyInput,0, 1);
+  SCH_Add_Task(get_fsm_automatic_run, 0,1);
+  SCH_Add_Task(get_fsm_manual_run, 0, 1);
+  SCH_Add_Task(get_fsm_pedestrian, 0, 1);
 
 
 
