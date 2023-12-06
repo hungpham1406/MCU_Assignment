@@ -61,7 +61,7 @@ void fsm_automatic_run() {
 			counter2--;
 			if(turnPedestrian_flag == 1) {
 				buzzer_activate(value_buzzer, value_buzzer);
-				value_buzzer = value_buzzer - BUZZER_MAX_VALUE/(greenTimer+yellowTimer);
+				value_buzzer = value_buzzer - BUZZER_MAX_VALUE/(greenTimer+yellowTimer-1);
 			}
 			else buzzer_activate(value_buzzer, 0);
 		}
@@ -91,7 +91,7 @@ void fsm_automatic_run() {
 			counter2--;
 			if(turnPedestrian_flag == 1) {
 				buzzer_activate(value_buzzer, value_buzzer);
-				value_buzzer = value_buzzer - BUZZER_MAX_VALUE/(greenTimer+yellowTimer);
+				value_buzzer = value_buzzer - BUZZER_MAX_VALUE/(greenTimer+yellowTimer-1);
 			}
 			else buzzer_activate(value_buzzer, 0);
 		}
